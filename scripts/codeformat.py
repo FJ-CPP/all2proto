@@ -34,16 +34,19 @@ except subprocess.CalledProcessError:
 style_file = os.path.join(root_dir, '.style.yapf')
 target_dirs = ['all2proto', 'scripts', 'tests']  # Directories to format
 
+to_format = []
 for dir_name in target_dirs:
     for root, dirs, files in os.walk(os.path.join(root_dir, dir_name)):
         for file_name in files:
             if file_name.endswith('.py'):
-                file_path = os.path.join(root, file_name)
-                yapf_command = [
-                    'yapf', '--style', style_file, '-vv', '--in-place',
-                    file_path
-                ]
-                subprocess.run(yapf_command)
+                to_format.append(os.path.join(root, file_name))
+
+if not to_format:
+    print('No Python files found to format.')
+    sys.exit(0)
+
+yapf_command = ['yapf', '--style', style_file, '-vv', '--in-place'] + to_format
+subprocess.run(yapf_command)
 
 if __name__ == '__main__':
     pass
