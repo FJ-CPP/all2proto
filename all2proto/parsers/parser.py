@@ -87,12 +87,12 @@ class SourceParser:
     Abstract class for parsers
     """
 
-    def __init__(self, source_files: List[str], search_paths: List[str]):
+    def __init__(self, source_file: str, search_paths: List[str]):
         """
-        :param source_files: list of source files
+        :param source_file: path to source file
         :param search_paths: list of paths to search for dependencies
         """
-        self.source_files = source_files
+        self.source_file = source_file
         self.search_paths = search_paths
 
     @abstractmethod

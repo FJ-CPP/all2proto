@@ -1,1 +1,1 @@
-from cpp_parser import CppSourceParser
+from .cpp_parser import CppSourceParser
